@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Your Transaction History</h2>
+
+    {% if transactions %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Counterparty UPI ID</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>
+                                {% if transaction.sender_upi == user.upi_id %}
+                                    <span class="badge bg-danger">Sent</span>
+                                {% else %}
+                                    <span class="badge bg-success">Received</span>
+                                {% endif %}
+                            </td>
+                            <td>₹{{ "%.2f" | format(transaction.amount) }}</td>
+                            <td>
+                                {% if transaction.sender_upi == user.upi_id %}
+                                    {{ transaction.receiver_upi }}
+                                {% else %}
+                                    {{ transaction.sender_upi }}
+                                {% endif %}
+                            </td>
+                            <td>{{ transaction.description if transaction.description else 'N/A' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            No transactions found yet. Start by sending or receiving money!
+        </div>
+    {% endif %}
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary">Back to Dashboard</a>
+    </div>
+{% endblock %}

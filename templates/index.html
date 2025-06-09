@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to UPI Wallet{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Welcome to Your Simulated UPI Wallet System!</h1>
+    <p class="lead text-center">Experience seamless peer-to-peer fund transfers with mock UPI IDs and QR code functionality.</p>
+
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <h3 class="mb-3 text-center">Key Features:</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="bi bi-person-plus-fill me-2"></i>User Registration & Secure Login</li>
+                <li class="list-group-item"><i class="bi bi-credit-card-fill me-2"></i>Unique UPI ID Generation & Wallet Management</li>
+                <li class="list-group-item"><i class="bi bi-qr-code-scan me-2"></i>Dynamic UPI QR Code Generation for Receiving Payments</li>
+                <li class="list-group-item"><i class="bi bi-currency-dollar me-2"></i>Peer-to-Peer Fund Transfers (Mock UPI)</li>
+                <li class="list-group-item"><i class="bi bi-journal-text me-2"></i>Comprehensive Transaction History Tracking</li>
+                <li class="list-group-item"><i class="bi bi-database-fill me-2"></i>Robust Data Storage with SQLite/PostgreSQL</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        {% if 'user_id' in session %}
+            <p class="fs-5">You are currently logged in. Head to your <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg mt-3">Dashboard</a>.</p>
+        {% else %}
+            <p class="fs-5">Ready to get started?</p>
+            <a href="{{ url_for('login') }}" class="btn btn-success btn-lg me-3">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-primary btn-lg">Register Now</a>
+        {% endif %}
+    </div>
+{% endblock %}

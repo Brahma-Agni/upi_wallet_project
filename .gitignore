@@ -1,0 +1,12 @@
+# Python specific
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Flask specific
+instance/
+
+# Database and QR codes (if not using cloud storage)
+db.sqlite3
+static/qrcodes/

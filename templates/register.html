@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h2 class="text-center mb-4">Create Your Account</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required aria-describedby="nameHelp">
+                    <div id="nameHelp" class="form-text">Your name will be associated with your transactions.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address:</label>
+                    <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll use your email to generate your UPI ID (e.g., username@mockupi).</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+            </form>
+            <p class="text-center mt-3">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2 class="mb-4">Welcome, {{ user.name }}!</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card text-center shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Your Wallet Details</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text fs-4 mb-2"><strong>UPI ID:</strong> <span class="text-success">{{ user.upi_id }}</span></p>
+                    <p class="card-text fs-4"><strong>Current Balance:</strong> <span class="text-success">₹{{ "%.2f" | format(wallet.balance) }}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card qr-code-box shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="card-title mb-0">Your Receive Payment QR Code</h5>
+                </div>
+                <div class="card-body">
+                    {# The qr_path variable is passed from your Flask route #}
+                    <img src="{{ url_for('static', filename=qr_path) }}" alt="Your UPI QR Code" class="img-fluid rounded" style="max-width: 200px;">
+                    <p class="card-text mt-3 text-muted">Scan this QR code to receive payments directly to your wallet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mb-4">Send Money</h3>
+    <form method="POST" action="{{ url_for('transfer') }}">
+        <div class="mb-3">
+            <label for="recipient_upi_id" class="form-label">Recipient UPI ID:</label>
+            <input type="text" class="form-control" id="recipient_upi_id" name="recipient_upi_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Amount (₹):</label>
+            <input type="number" class="form-control" id="amount" name="amount" step="0.01" min="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description (Optional):</label>
+            <input type="text" class="form-control" id="description" name="description" maxlength="255">
+        </div>
+        <button type="submit" class="btn btn-success w-100">Send Payment</button>
+    </form>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('history') }}" class="btn btn-outline-secondary btn-lg">View Transaction History</a>
+    </div>
+{% endblock %}
