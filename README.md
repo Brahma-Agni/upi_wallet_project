@@ -1,20 +1,3 @@
-upi_wallet_project/
-├── venv/                       # Python virtual environment (ignored by Git)
-├── templates/                  # HTML templates
-│   ├── base.html
-│   ├── dashboard.html
-│   ├── history.html
-│   ├── index.html
-│   ├── login.html
-│   └── register.html
-├── static/                     # Static files (CSS, JS, images)
-│   └── qrcodes/                # Dynamically generated QR codes (ignored by Git)
-├── .gitignore                  # Specifies untracked files to ignore
-├── app.py                      # Main Flask application
-├── requirements.txt            # Project dependencies
-├── db.sqlite3                  # SQLite database file (ignored by Git)
-├── .env                        # Environment variables (ignored by Git)
-└── README.md                   # This file
 
 # UPI Wallet Project (Mock UPI Simulation)
 
